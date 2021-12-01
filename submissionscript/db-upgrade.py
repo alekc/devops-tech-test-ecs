@@ -1,6 +1,7 @@
 import os
 import re
 import logging
+import sys
 import time
 
 import mysql.connector
@@ -10,7 +11,7 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
-file_path = os.environ.get("SCRIPT_PATH")
+file_path = sys.argv[1]
 migrationPattern = re.compile(r"^(\d+)\.?[\w\s]+\.sql$")
 
 # due to a race condition (mysql is up but not quiet ready to accept the connections)
@@ -31,10 +32,10 @@ if connectionEnabled is False:
 
 # we have a socket connection to db, try to auth
 db_connection = mysql.connector.connect(
-    host=os.environ.get("MYSQL_HOST"),
-    user=os.environ.get("MYSQL_USER"),
-    passwd=os.environ.get("MYSQL_PASSWORD"),
-    database=os.environ.get("MYSQL_DATABASE")
+    host=sys.argv[3],
+    user=sys.argv[2],
+    passwd=sys.argv[5],
+    database=sys.argv[4]
 )
 db_cursor = db_connection.cursor(dictionary=True)
 
