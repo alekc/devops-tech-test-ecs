@@ -23,4 +23,3 @@ I am going to assume following:
 
 # Changes to original files
 * Added an additional envvar `MYSQL_HOST` to the execution config in docker-compose.yml While it's possible to hardcode the target directly in the script, that would not be the right way to do in my opinion. To improve further, we could specify target port as well, for now I am assuming that it's going to be `3306`
-* Added an additional envvar 
