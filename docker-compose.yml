@@ -20,10 +20,11 @@ services:
       context: .
       dockerfile: Dockerfile.exec
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
       MYSQL_USER: dev
       MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: devopstt
+      MYSQL_HOST: mysql_container
+      SCRIPT_PATH: /scripts/
     restart: on-failure
     volumes:
       - ./submissionscript/:/submissionscript/
