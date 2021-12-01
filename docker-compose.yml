@@ -13,6 +13,8 @@ services:
       MYSQL_USER: dev
       MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: devopstt
+    ports:
+      - "3306:3306"
 
   exec_ubuntu_container:
     container_name: exec_container
@@ -20,12 +22,14 @@ services:
       context: .
       dockerfile: Dockerfile.exec
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
       MYSQL_USER: dev
       MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: devopstt
+      MYSQL_HOST: mysql_container
+      SCRIPT_PATH: /scripts/
     restart: on-failure
     volumes:
       - ./submissionscript/:/submissionscript/
+      - ./test/db_test.py:/scripts/db_test.py
     depends_on:
       - mysql_db_container
